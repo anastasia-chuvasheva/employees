@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Show Dept Personnel
+{% endblock %}
+{% block content %}
+    <div class="container d-flex justify-content-center">
+    <div class="row">
+    <div>
+        <h1> Employees By Department </h1>
+        <br>
+
+        {{ department.name }} department has {{ department.employees|length }} employees. They are:<br><br>
+
+    <div class="accordion">
+        {% for employee in employees %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                        <b>{{ employee.name }}</b>
+                </button>
+            </h2>
+
+            <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                <div class="accordion-body">
+                    <ul class="list-group">
+                        {% for job in employee.jobs %}
+                            <li class="list-group-item"><b>{{ job.name }}</b></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+        Department is lead by <b>{{ department.leadBy.name }}</b>.
+    </div>
+    </div>
+    </div>
+{% endblock %}
